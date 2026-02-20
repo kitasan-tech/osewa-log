@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
 
 import 'repository/care_record_repository.dart';
@@ -6,7 +7,11 @@ import 'view/app_theme.dart';
 import 'view/home_screen.dart';
 import 'viewmodel/care_viewmodel.dart';
 
-void main() => runApp(const OsewaApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initializeDateFormatting('ja');
+  runApp(const OsewaApp());
+}
 
 class OsewaApp extends StatelessWidget {
   const OsewaApp({super.key});
