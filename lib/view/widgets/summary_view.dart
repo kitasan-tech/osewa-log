@@ -11,7 +11,6 @@ import '../app_theme.dart';
 // ③ Widget 層: SummaryView
 //
 // ① Linter 対応：
-//   - _TechBadgeCard に const コンストラクタを追加（sort_constructors_first）
 //   - _SummaryRow の CareType? nullable 設計を廃止
 //     → CareType 用と "合計行" 用の 2 クラスに分離
 //     （public API に曖昧な nullable を持たせない）
@@ -108,8 +107,6 @@ class _SummaryListView extends StatelessWidget {
             _TotalSummaryRow(value: '$total回'),
           ],
         ),
-        const SizedBox(height: 12),
-        const _TechBadgeCard(),
         const SizedBox(height: 24),
       ],
     );
@@ -283,54 +280,3 @@ class _SummaryRowLayout extends StatelessWidget {
       );
 }
 
-class _TechBadgeCard extends StatelessWidget {
-  // ① コンストラクタを先頭に（sort_constructors_first）
-  const _TechBadgeCard();
-
-  @override
-  Widget build(final BuildContext context) => DecoratedBox(
-        decoration: BoxDecoration(
-          color: const Color(0xFFF3E5F5),
-          borderRadius: BorderRadius.circular(14),
-          border: Border.all(
-            color: const Color(0xFF9C27B0).withOpacity(0.2),
-          ),
-        ),
-        child: const Padding(
-          padding: EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Icon(Icons.code, color: Color(0xFF9C27B0), size: 16),
-                  SizedBox(width: 6),
-                  Text(
-                    'ポートフォリオ用デモ',
-                    style: TextStyle(
-                      color: Color(0xFF9C27B0),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 13,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 8),
-              Text(
-                '• Flutter / Dart\n'
-                '• MVVM + Repository パターン\n'
-                '• analysis_options.yaml による静的解析\n'
-                '• prefer_final_locals / always_declare_return_types\n'
-                '• unawaited_futures / use_build_context_synchronously\n'
-                '• sort_constructors_first / library_private_types_in_public_api',
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Color(0xFF555555),
-                  height: 1.6,
-                ),
-              ),
-            ],
-          ),
-        ),
-      );
-}
